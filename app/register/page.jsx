@@ -1,20 +1,16 @@
 "use client";
 
-import { Box, Button, Grid, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import { TextField, Grid, Button, Box } from "@mui/material";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-import SendIcon from "@mui/icons-material/Send";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useUser } from "../store/useUser";
+// import supabase from "../lib/supabaseClient";
 
-const LogIn = () => {
+const SignUp = () => {
 	const router = useRouter();
 	const supabase = createClientComponentClient();
-
-	const userIsLoggedIn = useUser(state => state.isLoggedIn);
-	const setIsLoggedIn = useUser(state => state.setIsLoggedIn);
-
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			email: "",
@@ -22,10 +18,10 @@ const LogIn = () => {
 		},
 	});
 
-	const handleSignIn = async ({ email, password }) => {
+	const handleSignUp = async ({ email, password }) => {
 		console.log("sdgsdgsdgsdg", email, password);
 
-		const { data, error } = await supabase.auth.signInWithPassword({
+		await supabase.auth.signUp({
 			email,
 			password,
 			options: {
@@ -33,15 +29,14 @@ const LogIn = () => {
 			},
 		});
 
-		const userData = await supabase.auth.getSession();
-		await setIsLoggedIn(userData?.data.session?.user.aud);
-
 		router.refresh();
+
 		router.push("/");
 	};
 
-	const onSubmit = async data => {
-		handleSignIn(data);
+	const onSubmit = data => {
+		console.log(data);
+		handleSignUp(data);
 	};
 
 	return (
@@ -82,4 +77,4 @@ const LogIn = () => {
 		</Box>
 	);
 };
-export default LogIn;
+export default SignUp;
