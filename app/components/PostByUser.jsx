@@ -1,10 +1,14 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-const Posts = async () => {
+const PostByUser = async () => {
 	const supabase = createServerComponentClient({ cookies });
 
-	const { data: posts } = await supabase.from("blogs").select();
+	const { data: userData } = await supabase.auth.getSession();
+
+	const user = userData?.session.user?.email;
+
+	const { data: posts } = await supabase.from("blogs").select("*").eq("author", user);
 
 	return (
 		<div>
@@ -14,4 +18,4 @@ const Posts = async () => {
 		</div>
 	);
 };
-export default Posts;
+export default PostByUser;

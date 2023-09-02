@@ -1,18 +1,23 @@
 import dynamic from "next/dynamic";
 
-const Header = dynamic(() => import("./components/Header"), { ssr: false });
-const TestPost = dynamic(() => import("./components/LinkNewPost"), { ssr: false });
-import Posts from "./components/posts/page";
+const LinkNewPost = dynamic(() => import("./components/LinkNewPost"), { ssr: false });
+const LinkUserOwnPosts = dynamic(() => import("./components/LinkUserOwnPosts"), { ssr: false });
+import AllPosts from "./components/AllPosts";
 import { Suspense } from "react";
+// import PostByUser from "./components/PostByUser";
+import { Grid } from "@mui/material";
 
 const Home = () => {
   return (
     <main>
       <div>
         <Suspense fallback={ <div>Loading...</div> }>
-          <Header />
-          <TestPost />
-          <Posts />
+          <Grid container justifyContent="center" alignItems="center" gap={ 50 } sx={ { mt: "20px" } }>
+            <LinkNewPost />
+            <LinkUserOwnPosts />
+          </Grid>
+          <AllPosts />
+          {/* <PostByUser /> */ }
         </Suspense>
       </div>
     </main>

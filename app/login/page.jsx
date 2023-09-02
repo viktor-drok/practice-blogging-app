@@ -44,10 +44,11 @@ const LogIn = () => {
 
 		const userData = await supabase.auth.getSession();
 		await setIsLoggedIn(userData?.data.session?.user.aud);
+		await setUser(userData?.data.session?.user.email);
 
 		const userSessionEmail = await userData?.data.session?.user.email;
 		const { data } = await supabase.from("users").select("isAuthor").eq("email", userSessionEmail);
-		await setIsAuthor(data[0].isAuthor);
+		await setIsAuthor(data[0]?.isAuthor);
 
 		router.refresh();
 		router.push("/");

@@ -1,19 +1,32 @@
 "use client";
 
 import { Box, Button, Grid, TextField, TextareaAutosize } from "@mui/material";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Controller, useForm } from "react-hook-form";
+import { useUser } from "../store/useUser";
+import { useRouter } from "next/navigation";
 
 const NewPost = () => {
+	const user = useUser(state => state.user);
+	const router = useRouter();
+
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			title: "",
 			post: "",
-			author: "",
+			author: user,
 		},
 	});
 
-	const onSubmit = data => {
+	const supabase = createClientComponentClient();
+
+	const onSubmit = async data => {
 		console.log(data);
+
+		await supabase.from("blogs").insert(data).select();
+
+		router.refresh();
+		router.push("/");
 	};
 
 	return (
@@ -37,7 +50,6 @@ const NewPost = () => {
 								<Controller
 									name="post"
 									control={control}
-									// placeholder="Your Password"
 									rules={{ required: true }}
 									render={({ field }) => <TextareaAutosize minRows={10} {...field} />}
 								/>

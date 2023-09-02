@@ -22,6 +22,7 @@ const SignUp = () => {
 
 	const setIsLoggedIn = useUser(state => state.setIsLoggedIn);
 	const setIsAuthor = useUser(state => state.setIsAuthor);
+	const setUser = useUser(state => state.setUser);
 
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
@@ -50,6 +51,7 @@ const SignUp = () => {
 		const userData = await supabase.auth.getSession();
 		await setIsLoggedIn(userData?.data.session?.user.aud);
 		await setIsAuthor(author);
+		await setUser(userData?.data.session?.user.email);
 
 		await supabase.from("users").insert({ firstName, lastName, isAuthor: author, email });
 
