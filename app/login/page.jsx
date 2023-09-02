@@ -1,10 +1,18 @@
 "use client";
 
-import { Box, Button, Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-import SendIcon from "@mui/icons-material/Send";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useUser } from "../store/useUser";
 
@@ -12,8 +20,9 @@ const LogIn = () => {
 	const router = useRouter();
 	const supabase = createClientComponentClient();
 
-	const userIsLoggedIn = useUser(state => state.isLoggedIn);
 	const setIsLoggedIn = useUser(state => state.setIsLoggedIn);
+	const setIsAuthor = useUser(state => state.setIsAuthor);
+	const setUser = useUser(state => state.setUser);
 
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
@@ -25,7 +34,7 @@ const LogIn = () => {
 	const handleSignIn = async ({ email, password }) => {
 		console.log("sdgsdgsdgsdg", email, password);
 
-		const { data, error } = await supabase.auth.signInWithPassword({
+		const { error } = await supabase.auth.signInWithPassword({
 			email,
 			password,
 			options: {
@@ -36,50 +45,81 @@ const LogIn = () => {
 		const userData = await supabase.auth.getSession();
 		await setIsLoggedIn(userData?.data.session?.user.aud);
 
+		const userSessionEmail = await userData?.data.session?.user.email;
+		const { data } = await supabase.from("users").select("isAuthor").eq("email", userSessionEmail);
+		await setIsAuthor(data[0].isAuthor);
+
 		router.refresh();
 		router.push("/");
 	};
 
 	const onSubmit = async data => {
+		console.log(data);
 		handleSignIn(data);
 	};
 
 	return (
-		<Box component="main">
-			<Grid container justifyContent="center" alignItems="center" sx={{ height: "100vh" }}>
-				<Box sx={{ width: ["50%", "40%", "30%"], p: 4, bgcolor: "background.paper", boxShadow: 2, borderRadius: 2 }}>
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<Grid container direction="column" gap={4} mb={4}>
-							<Grid container spacing={2} direction="column">
-								<label>Your Email</label>
-								<Controller
-									name="email"
-									control={control}
-									placeholder="Your Email"
-									rules={{ required: true }}
-									render={({ field }) => <TextField {...field} />}
-								/>
-							</Grid>
+		<Container component="main" maxWidth="xs">
+			<Box
+				sx={{
+					marginTop: 8,
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+				}}
+			>
+				<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+					<LockOutlinedIcon />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Sign in
+				</Typography>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Controller
+						name="email"
+						control={control}
+						placeholder="Your Email"
+						rules={{ required: true }}
+						render={({ field }) => (
+							<TextField
+								{...field}
+								margin="normal"
+								required
+								fullWidth
+								id="email"
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+								autoFocus
+							/>
+						)}
+					/>
 
-							<Grid container spacing={2} direction="column">
-								<label>Your Password</label>
-								<Controller
-									name="password"
-									control={control}
-									placeholder="Your Password"
-									rules={{ required: true }}
-									render={({ field }) => <TextField {...field} />}
-								/>
-							</Grid>
-						</Grid>
-
-						<Button variant="contained" type="submit" endIcon={<SendIcon />}>
-							Sign Up
-						</Button>
-					</form>
-				</Box>
-			</Grid>
-		</Box>
+					<Controller
+						name="password"
+						control={control}
+						placeholder="Your Password"
+						rules={{ required: true }}
+						render={({ field }) => (
+							<TextField
+								margin="normal"
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
+								autoComplete="current-password"
+								{...field}
+							/>
+						)}
+					/>
+					<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+						Sign In
+					</Button>
+				</form>
+			</Box>
+		</Container>
 	);
 };
 export default LogIn;

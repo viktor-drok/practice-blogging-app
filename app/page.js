@@ -1,10 +1,22 @@
+import dynamic from "next/dynamic";
 
-import Header from "./components/Header";
+const Header = dynamic(() => import("./components/Header"), { ssr: false });
+const TestPost = dynamic(() => import("./components/LinkNewPost"), { ssr: false });
+import Posts from "./components/posts/page";
+import { Suspense } from "react";
 
-export default async function Home() {
+const Home = () => {
   return (
-    <main className="">
-      <Header />
+    <main>
+      <div>
+        <Suspense fallback={ <div>Loading...</div> }>
+          <Header />
+          <TestPost />
+          <Posts />
+        </Suspense>
+      </div>
     </main>
   );
-}
+};
+
+export default Home;

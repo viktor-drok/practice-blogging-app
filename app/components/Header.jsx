@@ -1,8 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import { useUser } from "../store/useUser";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -10,15 +9,16 @@ const Header = () => {
 	const supabase = createClientComponentClient();
 	const userIsLoggedIn = useUser(state => state.isLoggedIn);
 	const setIsLoggedIn = useUser(state => state.setIsLoggedIn);
+	const setIsAuthor = useUser(state => state.setIsAuthor);
 
 	const router = useRouter();
 
 	const handleLogIn = () => router.push("/login");
 	const handleSignUp = () => router.push("/register");
 	const handleSLogOut = async () => {
-		const { data, error } = await supabase.auth.signOut();
-		console.log("signOut", data);
+		const { error } = await supabase.auth.signOut();
 		setIsLoggedIn(false);
+		setIsAuthor(false);
 		router.push("/");
 	};
 
@@ -32,7 +32,8 @@ const Header = () => {
 					<Box>
 						{userIsLoggedIn ? (
 							<Button color="inherit" onClick={handleSLogOut}>
-								Log Out
+								<Avatar sx={{ mr: "10px" }} />
+								<span>Log Out</span>
 							</Button>
 						) : (
 							<>
