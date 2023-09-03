@@ -10,7 +10,7 @@ export const revalidate = 60;
 const Post = ({ title, post, author }) => {
 	return (
 		<Box>
-			<Card variant="outlined" sx={{ height: "400px" }}>
+			<Card variant="outlined" sx={{ height: "400px", overflowY: "auto" }} py={4}>
 				<CardContent>
 					<Typography variant="h5" component="div">
 						{title}

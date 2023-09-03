@@ -9,10 +9,10 @@ const AllPosts = async () => {
 	const { data: posts } = await supabase.from("blogs").select();
 
 	return (
-		<Grid container justifyContent="center" alignItems="center" spacing={2} p={5}>
+		<Grid container justifyContent="center" alignItems="center" p={5}>
 			{posts?.map(post => {
 				return (
-					<Grid item key={post.id} lg={4} width={350}>
+					<Grid item key={post.id} lg={4} width={400} p={2}>
 						<Post title={post.title} post={post.post} author={post.author} />
 					</Grid>
 				);
