@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+// import { cookies } from "next/headers";
 import Post from "./Post";
 
 const AllPosts = async () => {
-	const supabase = createServerComponentClient({ cookies });
+	const supabase = createClientComponentClient();
 
 	const { data: posts } = await supabase.from("blogs").select();
 
