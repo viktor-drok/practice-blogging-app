@@ -28,7 +28,7 @@ const AddComment = () => {
 								left: "0",
 								right: "0",
 								zIndex: "1",
-								transition: "all 0.5s ease-in-out",
+								background: "#fff",
 						  }
 						: {
 								position: "absolute",
@@ -37,7 +37,6 @@ const AddComment = () => {
 								left: "0",
 								right: "0",
 								zIndex: "1",
-								transition: "all 0.5s ease-in-out",
 						  }
 				}
 			>
