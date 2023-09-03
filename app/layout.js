@@ -1,9 +1,10 @@
-import dynamic from 'next/dynamic';
-
-const Header = dynamic(() => import("./components/Header"), { ssr: false });
+// import dynamic from 'next/dynamic';
+export const dynamic = 'force-dynamic';
+// const Header = dynamic(() => import("./components/Header"), { ssr: false });
 
 import './globals.css';
 import { Roboto } from 'next/font/google';
+import Header from './components/Header';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700'] });
 
