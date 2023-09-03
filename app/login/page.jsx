@@ -16,6 +16,8 @@ import Container from "@mui/material/Container";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useUser } from "../store/useUser";
 
+export const revalidate = 60;
+
 const LogIn = () => {
 	const router = useRouter();
 	const supabase = createClientComponentClient();

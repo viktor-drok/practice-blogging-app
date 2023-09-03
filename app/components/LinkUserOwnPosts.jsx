@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useUser } from "../store/useUser";
 
+export const revalidate = 60;
+
 const LinkUserOwnPosts = () => {
 	const isAuthor = useUser(state => state.isAuthor);
 

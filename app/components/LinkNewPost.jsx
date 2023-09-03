@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useUser } from "../store/useUser";
 import { Box } from "@mui/material";
+export const revalidate = 60;
 
 const LinkNewPost = () => {
 	const isAuthor = useUser(state => state.isAuthor);

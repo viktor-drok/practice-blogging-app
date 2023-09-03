@@ -1,6 +1,8 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
+export const revalidate = 60;
+
 const PostByUser = async () => {
 	const supabase = createServerComponentClient({ cookies });
 

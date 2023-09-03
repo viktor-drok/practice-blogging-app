@@ -16,6 +16,8 @@ import { useRouter } from "next/navigation";
 import { useUser } from "../store/useUser";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
+export const revalidate = 60;
+
 const SignUp = () => {
 	const router = useRouter();
 	const supabase = createClientComponentClient();

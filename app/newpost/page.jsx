@@ -6,6 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { useUser } from "../store/useUser";
 import { useRouter } from "next/navigation";
 
+export const revalidate = 60;
+
 const NewPost = () => {
 	const user = useUser(state => state.user);
 	const router = useRouter();

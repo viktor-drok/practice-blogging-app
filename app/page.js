@@ -11,14 +11,14 @@ const Home = () => {
   return (
     <main>
       <div>
-        <Suspense fallback={ <div>Loading...</div> }>
-          <Grid container justifyContent="center" alignItems="center" gap={ 50 } sx={ { mt: "20px" } }>
-            <LinkNewPost />
-            <LinkUserOwnPosts />
-          </Grid>
-          <AllPosts />
-          {/* <PostByUser /> */ }
-        </Suspense>
+        {/* <Suspense fallback={ <div>Loading...</div> }> */ }
+        <Grid container justifyContent="center" alignItems="center" gap={ 50 } sx={ { mt: "20px" } }>
+          <LinkNewPost />
+          <LinkUserOwnPosts />
+        </Grid>
+        <AllPosts />
+        {/* <PostByUser /> */ }
+        {/* </Suspense> */ }
       </div>
     </main>
   );
