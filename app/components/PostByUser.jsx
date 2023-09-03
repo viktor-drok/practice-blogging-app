@@ -1,3 +1,4 @@
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
@@ -13,11 +14,18 @@ const PostByUser = async () => {
 	const { data: posts } = await supabase.from("blogs").select("*").eq("author", user);
 
 	return (
-		<div>
+		<Grid container gap={2} my={5} mx={5}>
 			{posts?.map(post => {
-				return <div key={post.id}>{post.title}</div>;
+				return (
+					<Card key={post.id} sx={{ maxWidth: 345, maxHeight: 345, overflow: "scroll" }}>
+						<CardContent>
+							<Typography variant="h4">{post.title}</Typography>
+							<Typography variant="body2">{post.post}</Typography>
+						</CardContent>
+					</Card>
+				);
 			})}
-		</div>
+		</Grid>
 	);
 };
 export default PostByUser;

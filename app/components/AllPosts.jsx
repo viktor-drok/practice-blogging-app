@@ -12,8 +12,8 @@ const AllPosts = async () => {
 		<Grid container justifyContent="center" alignItems="center" spacing={2} p={5}>
 			{posts?.map(post => {
 				return (
-					<Grid item key={post.id} lg={4} height={300} xs="auto">
-						<Post title={post.title} post={post.post} />
+					<Grid item key={post.id} lg={4} width={300}>
+						<Post title={post.title} post={post.post} author={post.author} />
 					</Grid>
 				);
 			})}
