@@ -5,11 +5,12 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import AddComment from "./AddComment";
 export const revalidate = 60;
 
 const Post = ({ title, post, author }) => {
 	return (
-		<Box>
+		<Box sx={{ position: "relative" }}>
 			<Card variant="outlined" sx={{ height: "400px", overflowY: "auto" }} py={4}>
 				<CardContent>
 					<Typography variant="h5" component="div">
@@ -28,7 +29,7 @@ const Post = ({ title, post, author }) => {
 					<Typography variant="body2">{post}</Typography>
 				</CardContent>
 				<CardActions>
-					<Button size="small">Leave a comment</Button>
+					<AddComment />
 				</CardActions>
 			</Card>
 		</Box>
