@@ -23,8 +23,6 @@ const NewPost = () => {
 	const supabase = createClientComponentClient();
 
 	const onSubmit = async data => {
-		console.log(data);
-
 		await supabase.from("blogs").insert(data).select();
 
 		router.refresh();

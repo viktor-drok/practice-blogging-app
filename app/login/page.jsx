@@ -34,8 +34,6 @@ const LogIn = () => {
 	});
 
 	const handleSignIn = async ({ email, password }) => {
-		console.log("sdgsdgsdgsdg", email, password);
-
 		const { error } = await supabase.auth.signInWithPassword({
 			email,
 			password,
@@ -57,7 +55,6 @@ const LogIn = () => {
 	};
 
 	const onSubmit = async data => {
-		console.log(data);
 		handleSignIn(data);
 	};
 

@@ -37,8 +37,6 @@ const SignUp = () => {
 	});
 
 	const handleSignUp = async ({ email, password, firstName, lastName, author }) => {
-		console.log("sdgsdgsdgsdg", email, password, firstName, lastName, author);
-
 		await supabase.auth.signUp({
 			email,
 			password,
@@ -63,7 +61,6 @@ const SignUp = () => {
 	};
 
 	const onSubmit = data => {
-		console.log(data);
 		handleSignUp(data);
 	};
 

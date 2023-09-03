@@ -17,7 +17,7 @@ const PostByUser = async () => {
 		<Grid container gap={2} my={5} mx={5}>
 			{posts?.map(post => {
 				return (
-					<Card key={post.id} sx={{ maxWidth: 345, maxHeight: 345, overflow: "scroll" }}>
+					<Card key={post.id} sx={{ width: 400, maxHeight: 350, overflowY: "auto" }}>
 						<CardContent>
 							<Typography variant="h4">{post.title}</Typography>
 							<Typography variant="body2">{post.post}</Typography>
