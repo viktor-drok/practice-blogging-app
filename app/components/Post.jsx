@@ -27,9 +27,9 @@ const Post = ({ title, post, author }) => {
 					</Typography>
 					<Typography variant="body2">{post}</Typography>
 				</CardContent>
-				{/* <CardActions>
-					<Button size="small">Learn More</Button>
-				</CardActions> */}
+				<CardActions>
+					<Button size="small">Leave a comment</Button>
+				</CardActions>
 			</Card>
 		</Box>
 	);
