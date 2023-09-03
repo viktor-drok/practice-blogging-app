@@ -1,18 +1,28 @@
+"use client";
 import { Box, Card, CardActions, CardContent, Grid, Typography } from "@mui/material";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import AddComment from "./AddComment";
+import { useUser } from "../store/useUser";
+import { useEffect, useState } from "react";
 
-export const revalidate = 60;
+const PostByUser = () => {
+	const supabase = createClientComponentClient();
 
-const PostByUser = async () => {
-	const supabase = createServerComponentClient({ cookies });
+	const isAuthor = useUser(state => state.isAuthor);
+	const [posts, setPosts] = useState([]);
+	const [userData, setUserData] = useState(null);
 
-	const { data: userData } = await supabase.auth.getSession();
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data: userData } = await supabase?.auth.getSession();
+			const user = userData?.session.user?.email;
+			const { data: posts } = await supabase.from("blogs").select("*").eq("author", user);
 
-	const user = userData?.session.user?.email;
-
-	const { data: posts } = await supabase.from("blogs").select("*").eq("author", user);
+			setPosts(posts);
+			setUserData(userData.session.user.aud);
+		};
+		fetchData();
+	}, [supabase]);
 
 	return (
 		<Grid container gap={2} my={5} mx={5}>
@@ -24,9 +34,7 @@ const PostByUser = async () => {
 								<Typography variant="h4">{post.title}</Typography>
 								<Typography variant="body2">{post.post}</Typography>
 							</CardContent>
-							<CardActions>
-								<AddComment />
-							</CardActions>
+							<CardActions>{!isAuthor && userData ? <AddComment /> : null}</CardActions>
 						</Card>
 					</Box>
 				);
