@@ -34,12 +34,13 @@ const PostByUser = () => {
 								<Typography variant="h4">{post.title}</Typography>
 								<Typography variant="body2">{post.post}</Typography>
 							</CardContent>
-							<CardActions>{!isAuthor && userData ? <AddComment /> : null}</CardActions>
+							<CardActions>{!isAuthor && userData ? <AddComment postId={post.id} /> : null}</CardActions>
 						</Card>
 					</Box>
 				);
 			})}
 		</Grid>
 	);
+	``;
 };
 export default PostByUser;

@@ -25,7 +25,7 @@ const Page = ({ params }) => {
 	}, [params.author, supabase]);
 
 	return (
-		<Grid container gap={2} my={5} mx={5}>
+		<Grid container gap={2} my={5} px={5} justifyContent="space-evenly">
 			{posts?.map(post => {
 				return (
 					<Box key={post.id} sx={{ position: "relative" }}>
@@ -34,7 +34,7 @@ const Page = ({ params }) => {
 								<Typography variant="h4">{post.title}</Typography>
 								<Typography variant="body2">{post.post}</Typography>
 							</CardContent>
-							<CardActions>{!isAuthor && userData ? <AddComment /> : null}</CardActions>
+							<CardActions>{!isAuthor && userData ? <AddComment postId={post.id} /> : null}</CardActions>
 						</Card>
 					</Box>
 				);

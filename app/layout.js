@@ -1,6 +1,4 @@
-// import dynamic from 'next/dynamic';
 export const dynamic = 'force-dynamic';
-// const Header = dynamic(() => import("./components/Header"), { ssr: false });
 
 import './globals.css';
 import { Roboto } from 'next/font/google';
