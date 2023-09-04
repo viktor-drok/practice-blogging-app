@@ -50,7 +50,7 @@ const LogIn = () => {
 		await setIsLoggedIn(userData?.data.session?.user.aud);
 		await setUser(userData?.data.session?.user.email);
 
-		const userSessionEmail = await userData?.data.session?.user.email;
+		const userSessionEmail = userData?.data.session?.user.email;
 		const { data } = await supabase.from("users").select("isAuthor").eq("email", userSessionEmail);
 		await setIsAuthor(data[0]?.isAuthor);
 
@@ -78,7 +78,7 @@ const LogIn = () => {
 				<Typography component="h1" variant="h5">
 					Sign in
 				</Typography>
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form onSubmit={handleSubmit(onSubmit)} className="w-full">
 					<Controller
 						name="email"
 						control={control}
