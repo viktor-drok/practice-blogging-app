@@ -12,7 +12,7 @@ import { useUser } from "../store/useUser";
 import { useEffect, useState } from "react";
 export const revalidate = 60;
 
-const Post = ({ title, post, author }) => {
+const Post = ({ title, post, author, postId }) => {
 	const supabase = createClientComponentClient();
 	const isAuthor = useUser(state => state.isAuthor);
 	const [userData, setUserData] = useState(null);
@@ -20,7 +20,7 @@ const Post = ({ title, post, author }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data: userData } = await supabase?.auth.getSession();
-			setUserData(userData.session.user.aud);
+			setUserData(userData?.session.user.aud);
 		};
 		fetchData();
 	}, [author, supabase]);
@@ -43,7 +43,7 @@ const Post = ({ title, post, author }) => {
 					</Typography>
 					<Typography variant="body2">{post}</Typography>
 				</CardContent>
-				<CardActions>{!isAuthor && userData !== null ? <AddComment /> : null}</CardActions>
+				<CardActions>{!isAuthor && userData !== null ? <AddComment postId={postId} /> : null}</CardActions>
 			</Card>
 		</Box>
 	);

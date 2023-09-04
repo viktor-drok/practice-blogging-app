@@ -19,7 +19,7 @@ const PostByUser = () => {
 			const { data: posts } = await supabase.from("blogs").select("*").eq("author", user);
 
 			setPosts(posts);
-			setUserData(userData.session.user.aud);
+			setUserData(userData.session.user ? userData.session.user.aud : null);
 		};
 		fetchData();
 	}, [supabase]);

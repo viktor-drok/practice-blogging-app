@@ -35,21 +35,23 @@ const Header = () => {
 						</Typography>
 					</Link>
 					<Box>
-						{userIsLoggedIn ? (
-							<Button color="inherit" onClick={handleSLogOut}>
-								<Avatar sx={{ mr: "10px" }} />
-								<span>Log Out</span>
-							</Button>
-						) : (
-							<>
-								<Button color="inherit" onClick={handleSignUp}>
-									Sign Up
+						<div suppressHydrationWarning>
+							{userIsLoggedIn ? (
+								<Button color="inherit" onClick={handleSLogOut}>
+									<Avatar sx={{ mr: "10px" }} />
+									<span>Log Out</span>
 								</Button>
-								<Button color="inherit" onClick={handleLogIn}>
-									Log In
-								</Button>
-							</>
-						)}
+							) : (
+								<>
+									<Button color="inherit" onClick={handleSignUp}>
+										Sign Up
+									</Button>
+									<Button color="inherit" onClick={handleLogIn}>
+										Log In
+									</Button>
+								</>
+							)}
+						</div>
 					</Box>
 				</Toolbar>
 			</AppBar>

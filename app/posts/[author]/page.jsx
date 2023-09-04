@@ -19,7 +19,7 @@ const Page = ({ params }) => {
 			const { data: posts } = await supabase.from("blogs").select("*").eq("author", params.author.replace("%40", "@"));
 
 			setPosts(posts);
-			setUserData(userData.session.user.aud);
+			setUserData(userData.session ? userData.session.user.aud : null);
 		};
 		fetchData();
 	}, [params.author, supabase]);

@@ -13,7 +13,7 @@ const AllPosts = async () => {
 			{posts?.map(post => {
 				return (
 					<Grid item key={post.id} lg={4} width={400} p={2}>
-						<Post title={post.title} post={post.post} author={post.author} />
+						<Post title={post.title} post={post.post} author={post.author} postId={post.id} />
 					</Grid>
 				);
 			})}
