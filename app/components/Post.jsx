@@ -20,7 +20,7 @@ const Post = ({ title, post, author, postId }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data: userData } = await supabase?.auth.getSession();
-			setUserData(userData?.session.user.aud);
+			setUserData(userData?.session ? userData?.session.user.aud : null);
 		};
 		fetchData();
 	}, [author, supabase]);

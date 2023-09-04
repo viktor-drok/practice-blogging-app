@@ -28,8 +28,8 @@ const Page = ({ params }) => {
 		<Grid container gap={2} my={5} px={5} justifyContent="space-evenly">
 			{posts?.map(post => {
 				return (
-					<Box key={post.id} sx={{ position: "relative" }}>
-						<Card sx={{ width: 400, maxHeight: 350, overflowY: "auto" }}>
+					<Box key={post.id} sx={{ position: "relative", height: "350px" }}>
+						<Card sx={{ width: 400, height: "100%", overflowY: "auto" }}>
 							<CardContent>
 								<Typography variant="h4">{post.title}</Typography>
 								<Typography variant="body2">{post.post}</Typography>
