@@ -8,7 +8,7 @@ import { Grid } from "@mui/material";
 
 const Home = () => {
   return (
-    <main>
+    <main suppressHydrationWarning >
       <div>
         <Suspense fallback={ <div>Loading...</div> }>
           <Grid container justifyContent="center" alignItems="center" gap={ 50 } sx={ { mt: "20px" } }>
