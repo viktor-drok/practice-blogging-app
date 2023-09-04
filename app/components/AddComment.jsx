@@ -1,16 +1,44 @@
 "use client";
 
-import { Box, Button, TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const AddComment = () => {
+const AddComment = ({ postId }) => {
 	const [expanded, setExpanded] = useState(false);
+	// const [authorEmail, setAuthorEmaill] = useState("");
+
+	// const supabase = createClientComponentClient();
+
+	// const getUserEmail = async () => {
+	// 	const { data } = await supabase?.auth.getSession();
+	// 	const email = data?.session?.user.email;
+	// 	return email;
+	// };
+
+	// // const authorEmail = useQuery("email", getUserEmail);
+
+	const { control, handleSubmit } = useForm({
+		defaultValues: {
+			authorEmail: "",
+			comment: "",
+			commendedPostId: postId,
+		},
+	});
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
 	};
 
-	const handleSubmitComment = () => {
+	// const AddCommentToDB = () => {};
+
+	const handleSubmitComment = data => {
+		// getUserEmail();
+		// console.log(data);
+		// console.log(postId);
 		setExpanded(false);
 	};
 
@@ -40,10 +68,17 @@ const AddComment = () => {
 						  }
 				}
 			>
-				<TextField fullWidth label="Your Comment" />
-				<Button onClick={handleSubmitComment} sx={{ float: "right" }}>
-					Add Comment
-				</Button>
+				<form onSubmit={handleSubmit(handleSubmitComment)}>
+					<Controller
+						name="comment"
+						control={control}
+						render={({ field }) => <TextField {...field} fullWidth label="Your Comment" />}
+					/>
+
+					<Button type="submit" sx={{ float: "right" }}>
+						Add Comment
+					</Button>
+				</form>
 			</Box>
 		</Box>
 	);
