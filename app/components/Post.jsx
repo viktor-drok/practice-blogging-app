@@ -24,6 +24,11 @@ const Post = ({ title, post, author, postId }) => {
 		};
 		fetchData();
 	}, [author, supabase]);
+
+	const hideAuthorEmail = email => {
+		const hiddenEmail = email.slice(3, email.indexOf(".") + 1);
+		return email.replace(hiddenEmail, "*".repeat(hiddenEmail.length));
+	};
 	return (
 		<Box sx={{ position: "relative" }}>
 			<Card variant="outlined" sx={{ height: "400px", overflowY: "auto" }} py={4}>
@@ -36,7 +41,7 @@ const Post = ({ title, post, author, postId }) => {
 							<Box sx={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", color: "blue" }}>
 								Author:
 								<Typography variant="body2" color="text.secondary">
-									{author}
+									{hideAuthorEmail(author)}
 								</Typography>
 							</Box>
 						</Link>
