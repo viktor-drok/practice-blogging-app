@@ -26,7 +26,11 @@ const LogIn = () => {
 	const setIsAuthor = useUser(state => state.setIsAuthor);
 	const setUser = useUser(state => state.setUser);
 
-	const { control, handleSubmit } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
 		defaultValues: {
 			email: "",
 			password: "",
@@ -79,7 +83,7 @@ const LogIn = () => {
 						name="email"
 						control={control}
 						placeholder="Your Email"
-						rules={{ required: true }}
+						rules={{ required: true, pattern: /^\S+@\S+$/i }}
 						render={({ field }) => (
 							<TextField
 								{...field}
@@ -94,6 +98,7 @@ const LogIn = () => {
 							/>
 						)}
 					/>
+					{errors.email && <p className="text-red-500 w-full">Enter correct email</p>}
 
 					<Controller
 						name="password"
