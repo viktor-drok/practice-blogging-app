@@ -9,8 +9,22 @@ import { Controller, useForm } from "react-hook-form";
 import { useUser } from "../store/useUser";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const AddComment = ({ postId }) => {
 	const authorEmail = useUser(state => state.user);
+	const notify = () =>
+		toast.success("Your comment has been added!", {
+			position: "top-right",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "dark",
+		});
 
 	const supabase = createClientComponentClient();
 
@@ -28,13 +42,11 @@ const AddComment = ({ postId }) => {
 		setExpanded(!expanded);
 	};
 
-	// const AddCommentToDB = () => {};
-
 	const handleSubmitComment = async data => {
 		setExpanded(false);
 
 		const { error } = await supabase.from("comments").insert(data);
-
+		notify();
 		console.log(error);
 	};
 
@@ -76,6 +88,18 @@ const AddComment = ({ postId }) => {
 					</Button>
 				</form>
 			</Box>
+			<ToastContainer
+				position="top-right"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+			/>
 		</Box>
 	);
 };
