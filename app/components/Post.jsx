@@ -10,12 +10,16 @@ import AddComment from "./AddComment";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useUser } from "../store/useUser";
 import { useEffect, useState } from "react";
+import SeeComments from "./SeeComments";
+import PostModal from "./PostModal";
+import { Button } from "@mui/material";
 export const revalidate = 60;
 
 const Post = ({ title, post, author, postId }) => {
 	const supabase = createClientComponentClient();
 	const isAuthor = useUser(state => state.isAuthor);
 	const [userData, setUserData] = useState(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -48,8 +52,12 @@ const Post = ({ title, post, author, postId }) => {
 					</Typography>
 					<Typography variant="body2">{post}</Typography>
 				</CardContent>
-				<CardActions>{!isAuthor && userData !== null ? <AddComment postId={postId} /> : null}</CardActions>
+				<Box pl={2}>
+					<SeeComments postId={postId} />
+					<CardActions>{!isAuthor && userData !== null ? <AddComment postId={postId} /> : null}</CardActions>
+				</Box>
 			</Card>
+			{isModalOpen ? <PostModal /> : null}
 		</Box>
 	);
 };

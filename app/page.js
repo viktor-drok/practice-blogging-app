@@ -6,6 +6,8 @@ import AllPosts from "./components/AllPosts";
 import { Suspense } from "react";
 import { Grid } from "@mui/material";
 
+export const revalidate = 0;
+
 const Home = () => {
   return (
     <main suppressHydrationWarning >
