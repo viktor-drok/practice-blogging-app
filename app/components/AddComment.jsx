@@ -5,25 +5,20 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
+import { useUser } from "../store/useUser";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const AddComment = ({ postId }) => {
+	const authorEmail = useUser(state => state.user);
+
+	const supabase = createClientComponentClient();
+
 	const [expanded, setExpanded] = useState(false);
-	// const [authorEmail, setAuthorEmaill] = useState("");
-
-	// const supabase = createClientComponentClient();
-
-	// const getUserEmail = async () => {
-	// 	const { data } = await supabase?.auth.getSession();
-	// 	const email = data?.session?.user.email;
-	// 	return email;
-	// };
-
-	// // const authorEmail = useQuery("email", getUserEmail);
 
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
-			authorEmail: "",
+			authorEmail,
 			comment: "",
 			commendedPostId: postId,
 		},
@@ -35,11 +30,12 @@ const AddComment = ({ postId }) => {
 
 	// const AddCommentToDB = () => {};
 
-	const handleSubmitComment = data => {
-		// getUserEmail();
-		// console.log(data);
-		// console.log(postId);
+	const handleSubmitComment = async data => {
 		setExpanded(false);
+
+		const { error } = await supabase.from("comments").insert(data);
+
+		console.log(error);
 	};
 
 	return (

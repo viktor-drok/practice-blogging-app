@@ -26,8 +26,8 @@ const Post = ({ title, post, author, postId }) => {
 	}, [author, supabase]);
 
 	const hideAuthorEmail = email => {
-		const hiddenEmail = email.slice(3, email.indexOf(".") + 1);
-		return email.replace(hiddenEmail, "*".repeat(hiddenEmail.length));
+		const hiddenEmail = email?.slice(3, email?.indexOf(".") + 1);
+		return email?.replace(hiddenEmail, "*".repeat(hiddenEmail.length));
 	};
 	return (
 		<Box sx={{ position: "relative" }}>
