@@ -1,5 +1,5 @@
 const getComment = async () => {
-  const res = await fetch("http://localhost:3000/api/comments", {
+  const res = await fetch(`${location.origin}/api/comments`, {
     method: "GET",
   });
   const data = await res.json();

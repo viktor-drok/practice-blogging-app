@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 const getPosts = async () => {
-	const res = await fetch("http://localhost:3000/api/allposts", {
+	const res = await fetch(`${location.origin}/api/allposts`, {
 		method: "GET",
 	});
 	const data = await res.json();
