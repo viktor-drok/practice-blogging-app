@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 import './globals.css';
 import { Roboto } from 'next/font/google';
