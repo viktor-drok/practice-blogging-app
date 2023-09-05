@@ -2,8 +2,10 @@ import { createRouteHandlerClient, createServerComponentClient } from "@supabase
 import { NextResponse } from "next/server";
 import { cookies } from 'next/headers';
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async () => {
-  const supabase = createRouteHandlerClient({ cookies });
+  const supabase = createServerComponentClient({ cookies });
 
   const { data: comment } = await supabase.from("comments").select("comment").eq("commendedPostId", 15);
 

@@ -6,6 +6,9 @@ import { useUser } from "../store/useUser";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
 const Header = () => {
 	const supabase = createClientComponentClient();
 	const userIsLoggedIn = useUser(state => state.isLoggedIn);

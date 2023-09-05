@@ -1,14 +1,14 @@
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
-// const LinkNewPost = dynamic(() => import("./components/LinkNewPost"), { ssr: false });
-// const LinkUserOwnPosts = dynamic(() => import("./components/LinkUserOwnPosts"), { ssr: false });
+const LinkNewPost = dynamic(() => import("./components/LinkNewPost"), { ssr: false });
+const LinkUserOwnPosts = dynamic(() => import("./components/LinkUserOwnPosts"), { ssr: false });
 import AllPosts from "./components/AllPosts";
 import { Suspense } from "react";
 import { Grid } from "@mui/material";
-import LinkNewPost from "./components/LinkNewPost";
-import LinkUserOwnPosts from "./components/LinkUserOwnPosts";
+// import LinkNewPost from "./components/LinkNewPost";
+// import LinkUserOwnPosts from "./components/LinkUserOwnPosts";
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 export const revalidate = 0;
 
