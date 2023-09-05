@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import Post from "./Post";
 
 const getPosts = async () => {
-	const res = await fetch("http://localhost:3000/api", {
+	const res = await fetch("http://localhost:3000/api/allposts", {
 		method: "GET",
 	});
 	const data = await res.json();
