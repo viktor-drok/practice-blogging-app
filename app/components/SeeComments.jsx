@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { FaRegComment } from "react-icons/fa";
 
 const SeeComments = ({ postId }) => {
-	console.log(postId);
+	// console.log(postId);
 
 	return (
 		<Box className="flex justify-start items-center px-4 py-2 rounded bg-[#b6daee] w-fit hover:bg-[#c8e5f5] transition-all cursor-pointer">

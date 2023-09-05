@@ -1,12 +1,23 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+
 import { Grid } from "@mui/material";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-// import { cookies } from "next/headers";
 import Post from "./Post";
 
-const AllPosts = async () => {
-	const supabase = createClientComponentClient();
+const getPosts = async () => {
+	const res = await fetch("http://localhost:3000/api", {
+		method: "GET",
+	});
+	const data = await res.json();
+	return data;
+};
 
-	const { data: posts } = await supabase.from("blogs").select();
+const AllPosts = () => {
+	const { data: posts } = useQuery({
+		queryKey: ["posts"],
+		queryFn: () => getPosts(),
+	});
 
 	return (
 		<Grid container justifyContent="center" alignItems="center" p={5}>
