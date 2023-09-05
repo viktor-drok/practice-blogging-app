@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { cookies } from 'next/headers';
 
 export const GET = async () => {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createRouteHandlerClient({ cookies });
 
   const { data: posts } = await supabase.from("blogs").select();
 
