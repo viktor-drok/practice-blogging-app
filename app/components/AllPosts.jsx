@@ -4,18 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Grid } from "@mui/material";
 import Post from "./Post";
+import getPosts from "../utils/getPosts";
 
 export const dynamic = "force-dynamic";
 
 export const revalidate = 60;
-
-const getPosts = async () => {
-	const res = await fetch(`${location.origin}/api/allposts`, {
-		method: "GET",
-	});
-	const data = await res.json();
-	return data;
-};
 
 const AllPosts = () => {
 	const { data: posts } = useQuery({

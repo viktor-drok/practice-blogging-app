@@ -5,10 +5,6 @@ const LinkUserOwnPosts = dynamic(() => import("./components/LinkUserOwnPosts"), 
 import AllPosts from "./components/AllPosts";
 import { Suspense } from "react";
 import { Grid } from "@mui/material";
-// import LinkNewPost from "./components/LinkNewPost";
-// import LinkUserOwnPosts from "./components/LinkUserOwnPosts";
-
-// export const dynamic = 'force-dynamic';
 
 export const revalidate = 0;
 
