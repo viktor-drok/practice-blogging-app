@@ -6,7 +6,7 @@ import AllPosts from "./components/AllPosts";
 import { Suspense } from "react";
 import { Grid } from "@mui/material";
 
-// export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';
 
 export const revalidate = 0;
 
