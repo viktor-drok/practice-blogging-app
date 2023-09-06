@@ -11,12 +11,14 @@ const Comment = () => {
 	const comments = useQuery({
 		queryKey: ["comment"],
 		queryFn: () => getComment(postId),
+		refetchOnWindowFocus: false,
 	});
 
 	const post = useQuery({
 		queryKey: ["post", postId],
 		queryFn: () => getPosts(),
 		select: data => data.find(item => item.id.toString() === postId.toString()),
+		refetchOnWindowFocus: false,
 	});
 
 	function stringToColor(string) {
