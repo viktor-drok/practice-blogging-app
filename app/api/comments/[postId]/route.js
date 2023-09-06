@@ -10,8 +10,6 @@ export const GET = async (request, { params }) => {
 
   const { data: comment } = await supabase.from("comments").select("comment, authorEmail, id,created_at").eq("commendedPostId", postId);
 
-  console.log(postId);
-
   if (comment) {
     return NextResponse.json(comment);
   }
