@@ -1,7 +1,7 @@
 "use client";
 
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
 import { useState } from "react";
 
@@ -11,7 +11,6 @@ function Providers({ children }) {
   return (
     <QueryClientProvider client={ client }>
       <ReactQueryStreamedHydration>{ children }</ReactQueryStreamedHydration>
-      {/* <ReactQueryDevtools initialIsOpen={ false } /> */ }
     </QueryClientProvider>
   );
 }
