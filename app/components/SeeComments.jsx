@@ -9,6 +9,7 @@ const SeeComments = ({ postId }) => {
 		queryKey: ["comment", postId],
 		queryFn: () => getComment(postId),
 	});
+
 	return (
 		<Link
 			href={`/comments/${postId}`}

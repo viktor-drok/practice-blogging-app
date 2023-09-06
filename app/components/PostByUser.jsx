@@ -4,6 +4,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import AddComment from "./AddComment";
 import { useUser } from "../store/useUser";
 import { useEffect, useState } from "react";
+import SeeComments from "./SeeComments";
 
 const PostByUser = () => {
 	const supabase = createClientComponentClient();
@@ -34,6 +35,7 @@ const PostByUser = () => {
 								<Typography variant="h4">{post.title}</Typography>
 								<Typography variant="body2">{post.post}</Typography>
 							</CardContent>
+							<SeeComments postId={post.id} />
 							<CardActions>{!isAuthor && userData ? <AddComment postId={post.id} /> : null}</CardActions>
 						</Card>
 					</Box>
