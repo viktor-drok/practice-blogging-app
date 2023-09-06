@@ -31,6 +31,9 @@ const Comment = () => {
 		<Box p={4}>
 			<Paper sx={{ p: 2, mb: 2 }}>
 				<Typography variant="h4">{post.data?.title}</Typography>
+				<Typography variant="body1" p={2}>
+					{post.data?.post}
+				</Typography>
 			</Paper>
 			{comments.data?.map(item => (
 				<Box key={item.id} ml={4}>
