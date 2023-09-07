@@ -52,7 +52,7 @@ const Comment = () => {
 	}
 
 	if (comments.isError || post.isError) {
-		return console.log(post.error.message);
+		return console.log(post?.error?.message || comments?.error?.message);
 	}
 
 	return (

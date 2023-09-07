@@ -10,7 +10,7 @@ export const revalidate = 0;
 
 const Home = () => {
   return (
-    <main suppressHydrationWarning >
+    <main >
       <div>
         <Suspense fallback={ <div>Loading...</div> }>
           <Grid container justifyContent="center" alignItems="center" gap={ 50 } sx={ { mt: "20px" } }>

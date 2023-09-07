@@ -6,6 +6,7 @@ import { Box, Card, CardActions, CardContent, Grid, Typography } from "@mui/mate
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect } from "react";
 import { useUser } from "@/app/store/useUser";
+import SeeComments from "@/app/components/SeeComments";
 
 const Page = ({ params }) => {
 	const supabase = createClientComponentClient();
@@ -34,7 +35,10 @@ const Page = ({ params }) => {
 								<Typography variant="h4">{post.title}</Typography>
 								<Typography variant="body2">{post.post}</Typography>
 							</CardContent>
-							<CardActions>{!isAuthor && userData ? <AddComment postId={post.id} /> : null}</CardActions>
+							<Box pl={2}>
+								<SeeComments postId={post.id} />
+								<CardActions>{!isAuthor && userData ? <AddComment postId={post.id} /> : null}</CardActions>
+							</Box>
 						</Card>
 					</Box>
 				);

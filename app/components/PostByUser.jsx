@@ -35,8 +35,10 @@ const PostByUser = () => {
 								<Typography variant="h4">{post.title}</Typography>
 								<Typography variant="body2">{post.post}</Typography>
 							</CardContent>
-							<SeeComments postId={post.id} />
-							<CardActions>{!isAuthor && userData ? <AddComment postId={post.id} /> : null}</CardActions>
+							<Box pl={2}>
+								<SeeComments postId={post.id} />
+								<CardActions>{!isAuthor && userData ? <AddComment postId={post.id} /> : null}</CardActions>
+							</Box>
 						</Card>
 					</Box>
 				);
